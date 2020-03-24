@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+{% set basket = app.session.get('basket') %}
+{% block title 'Panier' %}
+
+{% block body %}
+    <div class="jumbotron text-center">
+        <h1>Panier</h1>
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th>Id</th>
+                <th>image</th>
+                <th>Name</th>
+                <th>unite price</th>
+                <th>quantity commanded</th>
+            </tr>
+            </thead>
+            {% for product in  basket %}
+                <tr>
+                    <td>{{ product.product.getId }}</td>
+                    <td><img width="100" src="{{ product.product.getImageURL }} " alt="{{ product.product.getName }}" > </td>
+                    <td>{{ product.product.getName }}</td>
+                    <td>{{ product.product.getPrice }}</td>
+                    <td>{{ product.quantity }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+        <a href="{{ path('commande.ajoutcommande') }}">valider</a>
+
+    </div>
+
+
+
+
+{% endblock %}

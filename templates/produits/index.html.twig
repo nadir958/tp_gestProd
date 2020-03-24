@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+{% block title'liste des produits' %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1>liste des produits</h1>
+        <a href="{{ path('produits.lastthree') }}" class="btn btn-primary center"><i class="fas fa-clipboard-list"></i>3 derniers produits</a>
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th>Id</th>
+                <th>image</th>
+                <th>Name</th>
+                <th>price</th>
+                <th>quantity</th>
+                <th>description</th>
+                <th>create at</th>
+                <th>Add to basket</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            {% for product in products %}
+            <tr>
+                <td>{{ product.getId }}</td>
+                <td><img width="100" src="{{ product.getImageURL }} " alt="{{ product.getName }}" > </td>
+                <td>{{ product.getName }}</td>
+                <td>{{ product.getPrice }}</td>
+                <td>{{ product.getQuantity }}</td>
+                <td>{{ product.getDescription }}</td>
+                <td>{{ product.getCreateAt|date('Y-m-d') }}</td>
+                <td>
+                    <form action="{{ path('commande.ajoutpanier', {idprod: product.getId }) }}" method="post">
+                        <input type="number" name="commandQuantity" min="1" value="1" style="width: 25%" class="m-1">
+                        <button type="submit" class="btn btn-default border border-dark m-1">Add</button>
+                    </form>
+                </td>
+                <td>
+                    <a href="{{ path('commande.commande', {idprod: product.getId }) }}" class="btn btn-primary"><i class="fas fa-clipboard-list"></i>Details</a>
+                    <a href="#" class="btn btn-warning"><i class="fas fa-pen"></i>Edit</a>
+                    <a href="#" class="btn btn-danger"><i class="fas fa-times"></i>Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+
+    </div>
+
+
+
+
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+{% set basket = app.session.get('basket') %}
+{% block title 'commandes produit' %}
+
+{% block body %}
+    <h2>commandes produit</h2>
+    <table class="table">
+        <thead  class="thead-dark">
+        <tr>
+            <th>Command Id</th>
+            <th>Product</th>
+            <th>Unit price</th>
+            <th>Quantity</th>
+        </tr>
+        </thead>
+        {% for orderDetail in orderDetails %}
+            <tr>
+                <td>{{ orderDetail.getProductOrder.getId }}</td>
+                <td>{{ orderDetail.getProduct.getName }}</td>
+                <td>{{ orderDetail.getProduct.getPrice }}</td>
+                <td>{{ orderDetail.quantity }}</td>
+            </tr>
+        {% endfor %}
+
+    </table>
+
+    </div>
+
+
+
+
+{% endblock %}
